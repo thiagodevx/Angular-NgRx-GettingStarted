@@ -29,7 +29,11 @@ export class ProductListComponent implements OnInit, OnDestroy {
     this.sub = this.productService.selectedProductChanges$.subscribe(
       selectedProduct => this.selectedProduct = selectedProduct
     );
-
+    this.store.select('products').subscribe(state => {
+      if (state) {
+        this.displayCode = state.displayProductCode;
+      }
+    });
     this.productService.getProducts().subscribe({
       next: (products: Product[]) => this.products = products,
       error: (err: any) => this.errorMessage = err.error
@@ -42,7 +46,6 @@ export class ProductListComponent implements OnInit, OnDestroy {
 
   checkChanged(value: boolean): void {
     this.store.dispatch({ type: 'displayProductCode', payload: value });
-    this.displayCode = value;
   }
 
   newProduct(): void {
