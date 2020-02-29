@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+
+import * as fromUser from './state/user.state';
 import { NgForm } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
+
 
 import { AuthService } from './auth.service';
 import { Store } from '@ngrx/store';
@@ -17,7 +20,7 @@ export class LoginComponent implements OnInit {
 
   constructor(private authService: AuthService,
     private router: Router,
-    private store: Store<any>) {
+    private store: Store<fromUser.State>) {
   }
 
   ngOnInit(): void {
