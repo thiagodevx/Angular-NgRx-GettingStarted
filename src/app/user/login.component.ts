@@ -25,9 +25,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.store.select('users').subscribe(state => {
-      if (state) {
-        this.maskUserName = state.maskUserName;
-      }
+      this.maskUserName = state.maskUserName;
     });
   }
 
