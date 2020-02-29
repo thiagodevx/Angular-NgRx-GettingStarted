@@ -1,7 +1,9 @@
-export const ProductReducer = (state, action) => {
+import { ProductState } from './product.state';
+
+export const ProductReducer = (state: ProductState, action): ProductState => {
   switch (action.type) {
     case 'displayProductCode':
-      return { ...state, displayProductCode: action.payload };
+      return { ...state, showProductCode: action.payload };
     default:
       return state;
   }
