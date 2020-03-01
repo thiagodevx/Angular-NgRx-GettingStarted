@@ -3,7 +3,7 @@ import * as fromRoot from '../../app.state';
 
 export interface ProductState {
   showProductCode: boolean;
-  currentProduct: Product;
+  currentProductId: number;
   products: Product[];
 }
 

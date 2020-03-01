@@ -3,7 +3,7 @@ import { ProductState } from './product.state';
 const initialState: ProductState = {
   showProductCode: false,
   products: [],
-  currentProduct: null
+  currentProductId: null
 };
 
 export const ProductReducer = (state: ProductState = initialState, action): ProductState => {
