@@ -1,6 +1,5 @@
 import { createFeatureSelector, createSelector } from "@ngrx/store";
 import { ProductState } from './product.state';
-import { currentId } from 'async_hooks';
 
 const getProductFeatureState = createFeatureSelector<ProductState>('products');
 
