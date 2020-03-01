@@ -1,5 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
+import * as productSelectors from '../state/product.selectors';
+
 import * as fromProduct from '../state/product.state';
 
 import { Subscription } from 'rxjs';
@@ -18,7 +20,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
   pageTitle = 'Products';
   errorMessage: string;
 
-  displayCode: boolean;
+  showProductCode: boolean;
 
   products: Product[];
 
@@ -32,9 +34,9 @@ export class ProductListComponent implements OnInit, OnDestroy {
     this.sub = this.productService.selectedProductChanges$.subscribe(
       selectedProduct => this.selectedProduct = selectedProduct
     );
-    this.store.select('products').subscribe(state => {
-      this.displayCode = state.showProductCode;
-    });
+    this.store.select(productSelectors.getShowProductCode)
+      .subscribe(showProductCode => this.showProductCode = showProductCode);
+
     this.productService.getProducts().subscribe({
       next: (products: Product[]) => this.products = products,
       error: (err: any) => this.errorMessage = err.error
