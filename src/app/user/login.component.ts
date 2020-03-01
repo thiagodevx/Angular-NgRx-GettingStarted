@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import * as userSelectors from './state/user.selectors';
+
 import * as fromUser from './state/user.state';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -24,9 +26,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.store.select('users').subscribe(state => {
-      this.maskUserName = state.maskUserName;
-    });
+    this.store.select(userSelectors.getUserMask).subscribe(maskUserName => this.maskUserName = maskUserName);
   }
 
   cancel(): void {
