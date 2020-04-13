@@ -1,5 +1,5 @@
-import { Action } from '@ngrx/store';
-import { Product } from '../product';
+import {Action} from '@ngrx/store';
+import {Product} from '../product';
 
 export enum ProductActionTypes {
   ToogleProductCode = '[Product] Toggle Product Code',
@@ -10,22 +10,21 @@ export enum ProductActionTypes {
 
 export class ToggleProductCode implements Action {
   readonly type = ProductActionTypes.ToogleProductCode;
-  constructor(public payload: boolean) { }
+  constructor(public payload: boolean) {}
 }
 
 export class SetCurrentProduct implements Action {
-  readonly type = ProductActionTypes.ToogleProductCode;
-  constructor(public payload: Product) { }
+  readonly type = ProductActionTypes.SetCurrentProduct;
+  constructor(public payload: Product) {}
 }
 
 export class ClearCurrentProduct implements Action {
-  readonly type = ProductActionTypes.ToogleProductCode;
-  constructor(public payload: boolean) { }
+  readonly type = ProductActionTypes.ClearCurrentProduct;
 }
 
 export class InitializeCurrentProduct implements Action {
-  readonly type = ProductActionTypes.ToogleProductCode;
-  constructor(public payload: Product) { }
+  readonly type = ProductActionTypes.InitializeCurrentProduct;
+  constructor(public payload: Product) {}
 }
 
 export type ProductActions = ToggleProductCode | SetCurrentProduct | ClearCurrentProduct | InitializeCurrentProduct;
