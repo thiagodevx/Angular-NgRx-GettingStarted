@@ -24,7 +24,7 @@ export class ClearCurrentProduct implements Action {
 
 export class InitializeCurrentProduct implements Action {
   readonly type = ProductActionTypes.InitializeCurrentProduct;
-  constructor(public payload: Product) {}
+  constructor() {}
 }
 
 export type ProductActions = ToggleProductCode | SetCurrentProduct | ClearCurrentProduct | InitializeCurrentProduct;

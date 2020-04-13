@@ -9,7 +9,7 @@ import {Subscription} from 'rxjs';
 import {Product} from '../product';
 import {ProductService} from '../product.service';
 import {Store} from '@ngrx/store';
-import {ProductActionTypes, ToggleProductCode} from '../state/product.action';
+import {ToggleProductCode, SetCurrentProduct, InitializeCurrentProduct} from '../state/product.action';
 
 
 @Component({
@@ -17,7 +17,7 @@ import {ProductActionTypes, ToggleProductCode} from '../state/product.action';
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.css']
 })
-export class ProductListComponent implements OnInit, OnDestroy {
+export class ProductListComponent implements OnInit {
   pageTitle = 'Products';
   errorMessage: string;
 
@@ -27,14 +27,11 @@ export class ProductListComponent implements OnInit, OnDestroy {
 
   // Used to highlight the selected product in the list
   selectedProduct: Product | null;
-  sub: Subscription;
 
   constructor(private productService: ProductService, private store: Store<fromProduct.State>) {}
 
   ngOnInit(): void {
-    this.sub = this.productService.selectedProductChanges$.subscribe(
-      selectedProduct => this.selectedProduct = selectedProduct
-    );
+    this.store.select(productSelectors.getCurrentProduct).subscribe(product => this.selectedProduct = product);
     this.store.select(productSelectors.getShowProductCode)
       .subscribe(showProductCode => this.showProductCode = showProductCode);
 
@@ -44,20 +41,16 @@ export class ProductListComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnDestroy(): void {
-    this.sub.unsubscribe();
-  }
-
   checkChanged(value: boolean): void {
     this.store.dispatch(new ToggleProductCode(value));
   }
 
   newProduct(): void {
-    this.productService.changeSelectedProduct(this.productService.newProduct());
+    this.store.dispatch(new InitializeCurrentProduct());
   }
 
   productSelected(product: Product): void {
-    this.productService.changeSelectedProduct(product);
+    this.store.dispatch(new SetCurrentProduct(product));
   }
 
 }
